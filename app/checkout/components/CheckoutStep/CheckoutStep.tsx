@@ -1,12 +1,20 @@
 'use client';
 
 import { Box, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { CHECKOUT_STEP } from './constant';
 import { TabIndex, TabWrapper } from './_CheckoutStep';
+import { CheckoutState } from '@/redux/reducers/checkout/type';
+import { CheckoutAction } from '@/redux/reducers/checkout';
 
 export default function ProductList() {
-  const [value, setValue] = useState<number>(1);
+  const dispatch = useDispatch();
+  const activeTab = useSelector((state: { checkout: CheckoutState }) => state.checkout.activeTab);
+
+  const handleChangeTab = (value: number) => {
+    dispatch(CheckoutAction.setCheckoutActiveTab(value));
+  };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" bgcolor="#EDF4F9">
@@ -14,16 +22,15 @@ export default function ProductList() {
         <Box display="flex" alignItems="center" justifyContent="center">
           {CHECKOUT_STEP.map((item, index) => (
             <TabWrapper
-              active={value === item.value}
+              active={activeTab === item.value}
               key={index}
               display="flex"
               alignItems="center"
-              onClick={() => setValue(item.value)}>
-              <TabIndex active={value === item.value}>{index + 1}</TabIndex>
+              onClick={() => handleChangeTab(item.value)}>
+              <TabIndex active={activeTab === item.value}>{index + 1}</TabIndex>
               <Typography>{item.label}</Typography>
             </TabWrapper>
           ))}
-          {/* </Tabs> */}
         </Box>
       </Box>
     </Box>

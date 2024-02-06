@@ -2,7 +2,7 @@
 
 import { Box, Button, Tab, Tabs, Typography } from '@mui/material';
 import { useState } from 'react';
-import { PRODUCT } from './constant';
+import { PRODUCT } from '@/app/constant';
 import { TabPanelProps } from './types';
 import ProductItem from './ProductItem';
 
