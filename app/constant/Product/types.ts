@@ -5,6 +5,7 @@ export interface ProductList {
 }
 
 export interface ProductPlan {
+  id: number;
   name: string;
   image: string;
   value: string;
@@ -18,6 +19,7 @@ export interface ProductBenefit {
 }
 
 export interface ProductPackageType {
+  id: number;
   name: string;
   image: string;
   isFavorite: boolean;

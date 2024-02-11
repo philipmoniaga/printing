@@ -1,3 +1,4 @@
 import { PRODUCT } from './Product';
+import { Paths } from './Paths';
 
-export { PRODUCT };
+export { PRODUCT, Paths };

@@ -1,5 +1,14 @@
-import Checkout from './Checkout';
+'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { Paths } from '../constant/Paths';
 
 export default function CheckoutPage() {
-  return <Checkout />;
+  const router = useRouter();
+  useEffect(() => {
+    router.push(`${Paths.CHECKOUT}/0`);
+  }, []);
+
+  return <div />;
 }

@@ -2,10 +2,11 @@ import { ProductList } from './types';
 
 export const PRODUCT = [
   {
-    id: 0,
+    id: 1,
     tab: 'Kartu Nama',
     plan: [
       {
+        id: 1,
         name: 'Paket Basic',
         image: '/assets/basic.svg',
         value: 'Basic',
@@ -23,6 +24,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -40,6 +42,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -57,9 +60,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -76,6 +80,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 2,
         name: 'Paket Standard',
         image: '/assets/standard.svg',
         value: 'Standard',
@@ -93,6 +98,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -110,6 +116,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -127,9 +134,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -146,6 +154,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
         value: 'Platinum',
@@ -163,6 +172,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -180,6 +190,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -197,9 +208,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -218,10 +230,11 @@ export const PRODUCT = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     tab: 'Buku',
     plan: [
       {
+        id: 1,
         name: 'Paket Basic',
         image: '/assets/basic.svg',
         value: 'Basic',
@@ -239,6 +252,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -256,6 +270,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -273,9 +288,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -292,6 +308,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 2,
         name: 'Paket Standard',
         image: '/assets/standard.svg',
         value: 'Standard',
@@ -309,6 +326,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -326,6 +344,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -343,9 +362,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -362,6 +382,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
         value: 'Platinum',
@@ -379,6 +400,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -396,6 +418,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -413,9 +436,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -438,6 +462,7 @@ export const PRODUCT = [
     tab: 'Brosur',
     plan: [
       {
+        id: 1,
         name: 'Paket Basic',
         image: '/assets/basic.svg',
         value: 'Basic',
@@ -455,6 +480,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -472,6 +498,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -489,9 +516,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -508,6 +536,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 2,
         name: 'Paket Standard',
         image: '/assets/standard.svg',
         value: 'Standard',
@@ -525,6 +554,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -542,6 +572,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -559,9 +590,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -578,6 +610,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
         value: 'Platinum',
@@ -595,6 +628,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -612,6 +646,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -629,9 +664,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -654,6 +690,7 @@ export const PRODUCT = [
     tab: 'Banner',
     plan: [
       {
+        id: 1,
         name: 'Paket Basic',
         image: '/assets/basic.svg',
         value: 'Basic',
@@ -671,6 +708,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -688,6 +726,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -705,9 +744,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -724,6 +764,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 2,
         name: 'Paket Standard',
         image: '/assets/standard.svg',
         value: 'Standard',
@@ -741,6 +782,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -758,6 +800,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -775,9 +818,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
@@ -794,6 +838,7 @@ export const PRODUCT = [
         ],
       },
       {
+        id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
         value: 'Platinum',
@@ -811,6 +856,7 @@ export const PRODUCT = [
         ],
         packageType: [
           {
+            id: 1,
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
@@ -828,6 +874,7 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 2,
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
@@ -845,9 +892,10 @@ export const PRODUCT = [
             ],
           },
           {
+            id: 3,
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
-            isFavorite: true,
+            isFavorite: false,
             price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [

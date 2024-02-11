@@ -1,14 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { Box, Typography, RadioGroup, Radio, FormControlLabel, FormControl, Button } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
+import { useFormContext, Controller } from 'react-hook-form';
 
 import Step from '@/app/Home/components/Step';
-import { PRODUCT } from '@/app/constant';
 import { ButtonCount, CountWrapper, FavoriteWrapper, ProductItem, ProductWrapper, TabWrapper } from './_Step1';
 import { formatCurrency } from '@/utils/string';
+import { FieldValues } from '@/app/Provider/types';
 
 const List = [
   {
@@ -29,8 +29,8 @@ const List = [
 ];
 
 export default function Step1() {
-  const [activeType, setActiveType] = useState<number>(0);
-  const [selectedType, setSelectedType] = useState<number>(0);
+  const { setValue, watch, control } = useFormContext<FieldValues>();
+  const { productSelected, planSelected, countBox, packageSelected, activeStep } = watch();
 
   return (
     <div>
@@ -51,25 +51,31 @@ export default function Step1() {
           </Box>
           <ProductWrapper mt={6}>
             <Typography textAlign="center" variant="body1" color="white" fontWeight={600} mt={3} mb={2}>
-              Pilih Tipe Kartu Nama
+              Pilih Tipe {productSelected?.tab}
             </Typography>
             <Box display="flex" alignItems="center" justifyContent="center" gap="10px">
-              {PRODUCT[0].plan.map((item, index) => (
+              {productSelected?.plan.map((item, index) => (
                 <TabWrapper
-                  active={activeType === index}
+                  active={planSelected?.id === item.id}
                   key={index}
                   display="flex"
                   alignItems="center"
-                  onClick={() => setActiveType(index)}>
+                  onClick={() => {
+                    setValue('planSelected', item);
+                    setValue('packageSelected', item.packageType[0]);
+                  }}>
                   {item.name}
                 </TabWrapper>
               ))}
             </Box>
             <Box display="flex" padding={3} bgcolor={'white'} borderRadius="8px">
               <Box>
-                {PRODUCT[0].plan[activeType].packageType.map((item, index) => (
-                  <ProductItem active={selectedType === index} key={index} onClick={() => setSelectedType(index)}>
-                    <Radio checked={selectedType === index} value={index} />
+                {planSelected?.packageType.map((item, index) => (
+                  <ProductItem
+                    active={packageSelected?.id === item.id}
+                    key={index}
+                    onClick={() => setValue('packageSelected', item)}>
+                    <Radio checked={packageSelected?.id === item.id} value={index} />
                     <Box display="flex" alignItems="center" padding={1}>
                       <Box position="relative" width="180px" height="120px" mr={3}>
                         <Image src="/assets/splendorgel.svg" alt="splendor" fill />
@@ -91,19 +97,26 @@ export default function Step1() {
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
                       Sisi Cetak
                     </Typography>
-                    <RadioGroup value={'70000'} onChange={() => {}}>
-                      <FormControlLabel
-                        value="70000"
-                        control={<Radio size={'small'} />}
-                        label={<Typography variant="caption">1 Sisi (Rp70.000)</Typography>}
-                      />
-                      <FormControlLabel
-                        sx={{ fontSize: '10px' }}
-                        value="90000"
-                        control={<Radio size={'small'} />}
-                        label={<Typography variant="caption">2 Sisi (Rp90.000)</Typography>}
-                      />
-                    </RadioGroup>
+
+                    <Controller
+                      name="printSide"
+                      control={control}
+                      render={({ field }) => (
+                        <RadioGroup {...field}>
+                          <FormControlLabel
+                            value="1"
+                            control={<Radio size={'small'} />}
+                            label={<Typography variant="caption">1 Sisi (Rp70.000)</Typography>}
+                          />
+                          <FormControlLabel
+                            sx={{ fontSize: '10px' }}
+                            value="2"
+                            control={<Radio size={'small'} />}
+                            label={<Typography variant="caption">2 Sisi (Rp90.000)</Typography>}
+                          />
+                        </RadioGroup>
+                      )}
+                    />
                   </FormControl>
                 </Box>
                 <Box mb={4}>
@@ -111,48 +124,68 @@ export default function Step1() {
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
                       Sudut
                     </Typography>
-                    <RadioGroup value={'standar'} onChange={() => {}}>
-                      <FormControlLabel
-                        value="standar"
-                        control={<Radio size={'small'} />}
-                        label={<Typography variant="caption">Standar</Typography>}
-                      />
-                      <FormControlLabel
-                        sx={{ fontSize: '10px' }}
-                        value="lengkung"
-                        control={<Radio size={'small'} />}
-                        label={<Typography variant="caption">Lengkung (Tambah Rp15.000)</Typography>}
-                      />
-                    </RadioGroup>
+
+                    <Controller
+                      name="printCorner"
+                      control={control}
+                      render={({ field }) => (
+                        <RadioGroup {...field}>
+                          <FormControlLabel
+                            value="standard"
+                            control={<Radio size={'small'} />}
+                            label={<Typography variant="caption">Standar</Typography>}
+                          />
+                          <FormControlLabel
+                            sx={{ fontSize: '10px' }}
+                            value="round"
+                            control={<Radio size={'small'} />}
+                            label={<Typography variant="caption">Lengkung (Tambah Rp15.000)</Typography>}
+                          />
+                        </RadioGroup>
+                      )}
+                    />
                   </FormControl>
                 </Box>
                 <Box mb={5}>
                   <Typography variant="body2" sx={{ fontWeight: 600 }} mb={1}>
                     Jumlah Kotak
                   </Typography>
-                  <CountWrapper>
-                    <ButtonCount variant="contained">
-                      <Remove sx={{ fontSize: '16px' }} />
-                    </ButtonCount>
-                    <Typography variant="body2">1</Typography>
-                    <ButtonCount variant="contained">
-                      <Add sx={{ fontSize: '16px' }} />
-                    </ButtonCount>
-                  </CountWrapper>
+                  <Controller
+                    name="countBox"
+                    control={control}
+                    render={({ field }) => (
+                      <CountWrapper>
+                        <ButtonCount
+                          variant="contained"
+                          disabled={countBox === 1}
+                          onClick={() => field.onChange(countBox - 1)}>
+                          <Remove sx={{ fontSize: '16px' }} />
+                        </ButtonCount>
+                        <Typography variant="body2">{countBox}</Typography>
+                        <ButtonCount variant="contained" onClick={() => field.onChange(countBox + 1)}>
+                          <Add sx={{ fontSize: '16px' }} />
+                        </ButtonCount>
+                      </CountWrapper>
+                    )}
+                  />
                 </Box>
                 <Box>
                   <Typography variant="body2" sx={{ fontWeight: 600 }} mb={1}>
                     Harga Total
                   </Typography>
                   <Typography fontWeight={600} variant="h5">
-                    {formatCurrency(PRODUCT[0].plan[activeType].packageType[selectedType].price)}
+                    {formatCurrency(packageSelected?.price || '0')}
                   </Typography>
                 </Box>
               </Box>
             </Box>
             <Box>
               <Box marginX={3} paddingY={3} borderTop={'1px solid #D4D4D4'}>
-                <Button variant="contained" fullWidth size="large">
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  onClick={() => setValue('activeStep', activeStep + 1)}>
                   Selanjutnya
                 </Button>
               </Box>

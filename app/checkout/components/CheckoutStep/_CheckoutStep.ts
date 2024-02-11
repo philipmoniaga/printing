@@ -8,7 +8,6 @@ interface TabIndexProps {
 
 export const TabWrapper = styled(Box)((props: TabIndexProps) => ({
   borderBottom: props.active ? '2px solid #3A86FF' : 'none',
-  cursor: 'pointer',
   padding: '20px 8px',
 }));
 

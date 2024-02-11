@@ -2,9 +2,13 @@
 
 import { Box, Button, Tab, Tabs, Typography } from '@mui/material';
 import { useState } from 'react';
-import { PRODUCT } from '@/app/constant';
+import { useRouter } from 'next/navigation';
+import { useFormContext } from 'react-hook-form';
+
+import { PRODUCT, Paths } from '@/app/constant';
 import { TabPanelProps } from './types';
 import ProductItem from './ProductItem';
+import { FieldValues } from '@/app/Provider/types';
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -17,10 +21,13 @@ function CustomTabPanel(props: TabPanelProps) {
 }
 
 export default function ProductList() {
-  const [value, setValue] = useState<number>(0);
+  const router = useRouter();
+  const { watch, setValue, resetField } = useFormContext<FieldValues>();
+
+  const [valueTab, setValueTab] = useState<number>(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setValueTab(newValue);
   };
 
   return (
@@ -30,7 +37,7 @@ export default function ProductList() {
       </Typography>
       <Box sx={{ width: '70%' }}>
         <Box marginBottom={4}>
-          <Tabs value={value} onChange={handleChange} centered>
+          <Tabs value={valueTab} onChange={handleChange} centered>
             {PRODUCT.map((item, index) => (
               <Tab label={item.tab} key={index} sx={{ borderBottom: 1, borderColor: 'divider', fontWeight: 600 }} />
             ))}
@@ -38,12 +45,18 @@ export default function ProductList() {
         </Box>
         <Box width="60%" margin="auto">
           {PRODUCT.map((item, index) => (
-            <CustomTabPanel value={value} index={index} key={index}>
-              <ProductItem plan={item.plan} />
+            <CustomTabPanel value={valueTab} index={index} key={index}>
+              <ProductItem id={item.id} plan={item.plan} />
             </CustomTabPanel>
           ))}
           <Box py={2} margin="auto">
-            <Button variant="outlined" fullWidth>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => {
+                resetField();
+                router.push(Paths.CHECKOUT);
+              }}>
               Lihat Semua Paket
             </Button>
           </Box>

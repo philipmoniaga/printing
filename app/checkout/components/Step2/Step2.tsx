@@ -1,11 +1,19 @@
 'use client';
 
 import { Box, Typography, FormControl, Button, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { useFormContext, Controller } from 'react-hook-form';
 
 import { ProductWrapper, VisuallyHiddenInput } from './_Step2';
 import { UploadIcon } from '@/icons';
+import { FieldValues } from '@/app/Provider/types';
 
 export default function Step2() {
+  const { setValue, watch, control } = useFormContext<FieldValues>();
+  const { linkUrl, sendByEmail } = watch();
+
+  console.log('link url', linkUrl);
+  console.log('toggle', sendByEmail);
+
   return (
     <div>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" mt={5} mb={8}>
@@ -34,33 +42,50 @@ export default function Step2() {
                 <VisuallyHiddenInput type="file" />
               </Box>
               <Box mb={4}>
-                <FormControl fullWidth>
-                  <Typography variant="body2" sx={{ fontWeight: 600 }} mb={1}>
-                    Atau, copy paste link dari Dropbox, Google Drive, dan lainnya
-                  </Typography>
-                  <TextField
-                    size="small"
-                    sx={{
-                      '& div': {
-                        borderRadius: '8px',
-                      },
-                    }}
-                    placeholder="www.dropbox.com/..."
-                  />
-                </FormControl>
+                <Controller
+                  name="linkUrl"
+                  control={control}
+                  render={({ field }) => (
+                    <FormControl fullWidth {...field}>
+                      <Typography variant="body2" sx={{ fontWeight: 600 }} mb={1}>
+                        Atau, copy paste link dari Dropbox, Google Drive, dan lainnya
+                      </Typography>
+                      <TextField
+                        size="small"
+                        sx={{
+                          '& div': {
+                            borderRadius: '8px',
+                          },
+                        }}
+                        placeholder="www.dropbox.com/..."
+                      />
+                    </FormControl>
+                  )}
+                />
               </Box>
               <Box mb={4} width={'100%'}>
                 <FormControl fullWidth>
-                  <FormControlLabel
-                    control={<Checkbox defaultChecked size="small" />}
-                    label={
-                      <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                        Atau kirim gambar melalui email
-                      </Typography>
-                    }
+                  <Controller
+                    name="sendByEmail"
+                    control={control}
+                    render={({ field }) => (
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked size="small" />}
+                        label={
+                          <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                            Atau kirim gambar melalui email
+                          </Typography>
+                        }
+                        {...field}
+                      />
+                    )}
                   />
 
-                  <TextField variant="standard" />
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => <TextField variant="standard" {...field} />}
+                  />
                 </FormControl>
               </Box>
             </Box>

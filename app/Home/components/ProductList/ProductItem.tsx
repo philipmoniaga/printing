@@ -1,12 +1,22 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { ProductPlan } from './types';
+'use client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useFormContext } from 'react-hook-form';
+
+import { FieldValues } from '@/app/Provider/types';
+import { Paths } from '@/app/constant';
+import { ProductPlan } from '@/app/constant/Product/types';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 type Props = {
+  id: number;
   plan: ProductPlan[];
 };
 
-export default function ProductItem({ plan }: Props) {
+export default function ProductItem({ id, plan }: Props) {
+  const { watch, setValue } = useFormContext<FieldValues>();
+
+  const router = useRouter();
   return (
     <>
       <Box display="flex" justifyContent="center" gap="24px">
@@ -39,7 +49,13 @@ export default function ProductItem({ plan }: Props) {
               </Box>
             </Box>
             <Box px={2} pb={2}>
-              <Button variant="contained" fullWidth>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() => {
+                  setValue('planSelected', item);
+                  router.push(`${Paths.CHECKOUT}/${id}`);
+                }}>
                 Order {item.value}
               </Button>
             </Box>

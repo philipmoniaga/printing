@@ -1,29 +1,49 @@
 'use client';
-import { useSelector } from 'react-redux';
-import { CheckoutState } from '@/redux/reducers/checkout/type';
+import { useEffect } from 'react';
+
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
+import { useParams } from 'next/navigation';
+import { PRODUCT } from '../constant';
+import { useFormContext } from 'react-hook-form';
+import { FieldValues } from '@/app/Provider/types';
+
+const CHECKOUT_PAGE = {
+  0: Step1,
+  1: Step2,
+  2: Step3,
+  3: Step4,
+} as Record<number, any>;
 
 export default function Checkout() {
-  const activeTab = useSelector((state: { checkout: CheckoutState }) => state.checkout.activeTab);
-  console.log('activeTab', activeTab);
+  const params = useParams();
+  const { setValue, watch } = useFormContext<FieldValues>();
+  const { planSelected, productSelected, activeStep } = watch();
 
-  const renderPage = () => {
-    switch (activeTab) {
-      case 0:
-        return <Step1 />;
-      case 1:
-        return <Step2 />;
-      case 2:
-        return <Step3 />;
-      case 3:
-        return <Step4 />;
-      default:
-        return <div />;
+  useEffect(() => {
+    const selectedProduct = PRODUCT.find((data) => data.id === params.id);
+
+    if (selectedProduct) {
+      setValue('productSelected', selectedProduct);
+    } else {
+      setValue('productSelected', PRODUCT[0]);
     }
-  };
+  }, [params.id, setValue]);
 
-  return <div>{renderPage()}</div>;
+  useEffect(() => {
+    if (!planSelected && productSelected) {
+      setValue('planSelected', productSelected?.plan[0]);
+      setValue('packageSelected', productSelected?.plan[0].packageType[0]);
+    }
+  }, [productSelected, planSelected, setValue]);
+
+  const Content = CHECKOUT_PAGE[activeStep];
+
+  return (
+    <div>
+      <Content />
+    </div>
+  );
 }
