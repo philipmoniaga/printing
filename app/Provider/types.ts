@@ -8,8 +8,19 @@ export type FieldValues = {
   printSide: string;
   printCorner: 'standard' | 'corner';
   countBox: number;
-  file: null | HTMLInputElement;
+  file: null | any;
   linkUrl: string;
   sendByEmail: boolean;
   email: string;
+  recipient: {
+    name: string;
+    email: string;
+    phoneNumber: string;
+  };
+  address: {
+    city: string;
+    zipCode: string;
+    fullAddress: string;
+    logisticOption: 'regular' | 'express';
+  };
 };

@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function ProductItem({ id, plan }: Props) {
-  const { watch, setValue } = useFormContext<FieldValues>();
+  const { setValue } = useFormContext<FieldValues>();
 
   const router = useRouter();
   return (
@@ -54,6 +54,7 @@ export default function ProductItem({ id, plan }: Props) {
                 fullWidth
                 onClick={() => {
                   setValue('planSelected', item);
+                  setValue('packageSelected', item?.packageType[0]);
                   router.push(`${Paths.CHECKOUT}/${id}`);
                 }}>
                 Order {item.value}

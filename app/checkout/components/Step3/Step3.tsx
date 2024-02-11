@@ -12,6 +12,8 @@ import {
 } from './_Step3';
 import { useState } from 'react';
 import { formatCurrency } from '@/utils/string';
+import { Controller, useFormContext } from 'react-hook-form';
+import { FieldValues } from '@/app/Provider/types';
 
 const Payment = [
   {
@@ -34,6 +36,8 @@ const Payment = [
 
 export default function Step3() {
   const [activePayment, setActivePayment] = useState<number>(0);
+  const { setValue, watch, control } = useFormContext<FieldValues>();
+  const { countBox, packageSelected, activeStep, file, printSide, address } = watch();
 
   return (
     <div>
@@ -48,11 +52,11 @@ export default function Step3() {
                 <Box width="50%">
                   <InputWrapper>
                     <CustomerTypography variant="body2">Tipe Kartu Nama</CustomerTypography>
-                    <Typography variant="body2">: Splendorgel</Typography>
+                    <Typography variant="body2">: {packageSelected?.name}</Typography>
                   </InputWrapper>
                   <InputWrapper>
                     <CustomerTypography variant="body2">Sisi Cetak</CustomerTypography>
-                    <Typography variant="body2">: 1 Sisi</Typography>
+                    <Typography variant="body2">: {printSide} Sisi</Typography>
                   </InputWrapper>
                   <InputWrapper>
                     <CustomerTypography variant="body2">Laminating</CustomerTypography>
@@ -64,14 +68,14 @@ export default function Step3() {
                   </InputWrapper>
                   <InputWrapper>
                     <CustomerTypography variant="body2">Jumlah Kotak</CustomerTypography>
-                    <Typography variant="body2">: 1</Typography>
+                    <Typography variant="body2">: {countBox}</Typography>
                   </InputWrapper>
                   <InputWrapper>
                     <CustomerTypography variant="body2">File Desain</CustomerTypography>
                     <Typography variant="body2">
                       :{' '}
-                      <Typography component="span" color="primary">
-                        kartu.pdf
+                      <Typography component="span" variant="body2" color="primary">
+                        {file?.name ?? '-'}
                       </Typography>
                     </Typography>
                   </InputWrapper>
@@ -79,7 +83,7 @@ export default function Step3() {
                 <Box width="50%">
                   <InputWrapper>
                     <CustomerTypography variant="body2">Sub Total</CustomerTypography>
-                    <Typography variant="body2">: {formatCurrency(70000)}</Typography>
+                    <Typography variant="body2">: {formatCurrency(packageSelected?.price as string)}</Typography>
                   </InputWrapper>
                   <InputWrapper>
                     <CustomerTypography variant="body2">Biaya Kirim</CustomerTypography>
@@ -96,7 +100,7 @@ export default function Step3() {
                   <Box width={'100%'} borderBottom={'1px solid #D4D4D4'} mb={1} pb={1} />
                   <InputWrapper>
                     <CustomerTypography variant="body2">Grand Total</CustomerTypography>
-                    <Typography variant="h6">{formatCurrency(70000)}</Typography>
+                    <Typography variant="h6">{formatCurrency(packageSelected?.price as string)}</Typography>
                   </InputWrapper>
                 </Box>
               </Box>
@@ -106,15 +110,27 @@ export default function Step3() {
                 </Typography>
                 <InputWrapper>
                   <CustomerTypography variant="body2">Nama</CustomerTypography>
-                  <CustomerTextField size="small" />
+                  <Controller
+                    name="recipient.name"
+                    control={control}
+                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                  />
                 </InputWrapper>
                 <InputWrapper>
                   <CustomerTypography variant="body2">Email</CustomerTypography>
-                  <CustomerTextField size="small" />
+                  <Controller
+                    name="recipient.email"
+                    control={control}
+                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                  />
                 </InputWrapper>
                 <InputWrapper>
                   <CustomerTypography variant="body2">Nomor Handphone</CustomerTypography>
-                  <CustomerTextField size="small" />
+                  <Controller
+                    name="recipient.phoneNumber"
+                    control={control}
+                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                  />
                 </InputWrapper>
               </Box>
               <Box borderBottom={'2px solid #D4D4D4'} mb={4} pb={2}>
@@ -123,33 +139,51 @@ export default function Step3() {
                 </Typography>
                 <InputWrapper>
                   <CustomerTypography variant="body2">Kota / Kecamatan*</CustomerTypography>
-                  <CustomerTextField size="small" />
+                  <Controller
+                    name="address.city"
+                    control={control}
+                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                  />
                 </InputWrapper>
                 <InputWrapper>
                   <CustomerTypography variant="body2">Kode Pos*</CustomerTypography>
-                  <CustomerTextField size="small" />
+                  <Controller
+                    name="address.zipCode"
+                    control={control}
+                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                  />
                 </InputWrapper>
                 <Box display="flex" mb={2}>
                   <CustomerTypography variant="body2">Alamat Lengkap*</CustomerTypography>
-                  <CustomerTextArea />
+                  <Controller
+                    name="address.fullAddress"
+                    control={control}
+                    render={({ field }) => <CustomerTextArea {...field} />}
+                  />
                 </Box>
                 <Box display="flex" mb={2}>
                   <CustomerTypography variant="body2" mt="10px">
                     Opsi Pengiriman
                   </CustomerTypography>
-                  <RadioGroup value={'standar'} onChange={() => {}}>
-                    <FormControlLabel
-                      value="standar"
-                      control={<Radio size={'small'} />}
-                      label={<Typography variant="caption">Regular (2-3 Hari)</Typography>}
-                    />
-                    <FormControlLabel
-                      sx={{ fontSize: '10px' }}
-                      value="lengkung"
-                      control={<Radio size={'small'} />}
-                      label={<Typography variant="caption">Express (1-2 Hari)</Typography>}
-                    />
-                  </RadioGroup>
+                  <Controller
+                    name="address.logisticOption"
+                    control={control}
+                    render={({ field }) => (
+                      <RadioGroup {...field}>
+                        <FormControlLabel
+                          value="regular"
+                          control={<Radio size={'small'} />}
+                          label={<Typography variant="caption">Regular (2-3 Hari)</Typography>}
+                        />
+                        <FormControlLabel
+                          sx={{ fontSize: '10px' }}
+                          value="express"
+                          control={<Radio size={'small'} />}
+                          label={<Typography variant="caption">Express (1-2 Hari)</Typography>}
+                        />
+                      </RadioGroup>
+                    )}
+                  />
                 </Box>
               </Box>
               <Box mb={4}>
@@ -171,7 +205,11 @@ export default function Step3() {
             </Box>
             <Box>
               <Box marginX={3} pb={3}>
-                <Button variant="contained" fullWidth size="large">
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  onClick={() => setValue('activeStep', activeStep + 1)}>
                   Bayar Sekarang
                 </Button>
               </Box>

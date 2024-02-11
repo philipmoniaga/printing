@@ -157,7 +157,7 @@ export const PRODUCT = [
         id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
-        value: 'Platinum',
+        value: 'Ultimate',
         price: '2000',
         benefit: [
           {
@@ -385,7 +385,7 @@ export const PRODUCT = [
         id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
-        value: 'Platinum',
+        value: 'Ultimate',
         price: '2000',
         benefit: [
           {
@@ -613,7 +613,7 @@ export const PRODUCT = [
         id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
-        value: 'Platinum',
+        value: 'Ultimate',
         price: '2000',
         benefit: [
           {
@@ -841,7 +841,7 @@ export const PRODUCT = [
         id: 3,
         name: 'Paket Ultimate',
         image: '/assets/ultimate.svg',
-        value: 'Platinum',
+        value: 'Ultimate',
         price: '2000',
         benefit: [
           {

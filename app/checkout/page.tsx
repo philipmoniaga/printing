@@ -7,7 +7,7 @@ import { Paths } from '../constant/Paths';
 export default function CheckoutPage() {
   const router = useRouter();
   useEffect(() => {
-    router.push(`${Paths.CHECKOUT}/0`);
+    router.replace(`${Paths.CHECKOUT}/1`);
   }, []);
 
   return <div />;

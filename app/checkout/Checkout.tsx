@@ -19,18 +19,28 @@ const CHECKOUT_PAGE = {
 
 export default function Checkout() {
   const params = useParams();
-  const { setValue, watch } = useFormContext<FieldValues>();
+  const { setValue, watch, resetField } = useFormContext<FieldValues>();
   const { planSelected, productSelected, activeStep } = watch();
 
   useEffect(() => {
-    const selectedProduct = PRODUCT.find((data) => data.id === params.id);
+    setValue('activeStep', 0);
+    resetField('printCorner');
+    resetField('printSide');
+    resetField('countBox');
+    resetField('file');
+    resetField('linkUrl');
+    resetField('sendByEmail');
+    resetField('recipient');
+    resetField('address');
+
+    const selectedProduct = PRODUCT.find((data) => data.id === parseInt(params.id as string));
 
     if (selectedProduct) {
       setValue('productSelected', selectedProduct);
     } else {
       setValue('productSelected', PRODUCT[0]);
     }
-  }, [params.id, setValue]);
+  }, [params.id, setValue, resetField]);
 
   useEffect(() => {
     if (!planSelected && productSelected) {

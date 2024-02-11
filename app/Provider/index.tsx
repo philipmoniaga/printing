@@ -3,6 +3,8 @@
 import './globals.css';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import theme from './theme';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FieldValues } from './types';
@@ -21,6 +23,17 @@ export default function ProviderComponent({ children }: { children: React.ReactN
       linkUrl: '',
       sendByEmail: false,
       email: '',
+      recipient: {
+        name: '',
+        email: '',
+        phoneNumber: '',
+      },
+      address: {
+        city: '',
+        zipCode: '',
+        fullAddress: '',
+        logisticOption: 'regular',
+      },
     },
     mode: 'onChange',
   });

@@ -54,7 +54,7 @@ export default function ProductList() {
               variant="outlined"
               fullWidth
               onClick={() => {
-                resetField();
+                setValue('planSelected', null);
                 router.push(Paths.CHECKOUT);
               }}>
               Lihat Semua Paket
