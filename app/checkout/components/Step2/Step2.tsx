@@ -8,8 +8,14 @@ import { UploadIcon } from '@/icons';
 import { FieldValues } from '@/app/Provider/types';
 
 export default function Step2() {
-  const { setValue, watch, control } = useFormContext<FieldValues>();
-  const { activeStep, file } = watch();
+  const {
+    setValue,
+    watch,
+    control,
+    formState: { errors },
+    clearErrors,
+  } = useFormContext<FieldValues>();
+  const { activeStep, file, sendByEmail } = watch();
 
   const handleUpload = (files: any) => {
     const maxSize = 10 * 1024 * 1024; // 10 MB in bytes
@@ -66,7 +72,7 @@ export default function Step2() {
                 <Controller
                   name="linkUrl"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormControl fullWidth {...field}>
                       <Typography variant="body2" sx={{ fontWeight: 600 }} mb={1}>
                         Atau, copy paste link dari Dropbox, Google Drive, dan lainnya
@@ -79,6 +85,8 @@ export default function Step2() {
                           },
                         }}
                         placeholder="www.dropbox.com/..."
+                        error={!!fieldState?.error?.message}
+                        helperText={fieldState?.error?.message}
                       />
                     </FormControl>
                   )}
@@ -91,7 +99,7 @@ export default function Step2() {
                     control={control}
                     render={({ field }) => (
                       <FormControlLabel
-                        control={<Checkbox defaultChecked size="small" />}
+                        control={<Checkbox checked={sendByEmail} size="small" />}
                         label={
                           <Typography variant="body2" sx={{ fontWeight: 600 }}>
                             Atau kirim gambar melalui email
@@ -105,7 +113,15 @@ export default function Step2() {
                   <Controller
                     name="email"
                     control={control}
-                    render={({ field }) => <TextField variant="standard" {...field} />}
+                    render={({ field, fieldState }) => (
+                      <TextField
+                        variant="standard"
+                        disabled={!sendByEmail}
+                        {...field}
+                        error={!!fieldState.error?.message}
+                        helperText={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </FormControl>
               </Box>
@@ -116,7 +132,11 @@ export default function Step2() {
                   variant="contained"
                   fullWidth
                   size="large"
-                  onClick={() => setValue('activeStep', activeStep + 1)}>
+                  disabled={!!(errors.linkUrl || (errors.email && sendByEmail))}
+                  onClick={() => {
+                    clearErrors();
+                    setValue('activeStep', activeStep + 1);
+                  }}>
                   Selanjutnya
                 </Button>
               </Box>

@@ -1,6 +1,15 @@
 'use client';
 
-import { Box, Typography, Button, FormControlLabel, RadioGroup, Radio } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  FormControl,
+  FormHelperText,
+} from '@mui/material';
 
 import {
   CustomerTextArea,
@@ -10,8 +19,8 @@ import {
   PaymentBox,
   ProductWrapper,
 } from './_Step3';
-import { useState } from 'react';
-import { formatCurrency } from '@/utils/string';
+import { useMemo, useState } from 'react';
+import { formatCurrency, isEmptyObject } from '@/utils/string';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
 
@@ -36,8 +45,24 @@ const Payment = [
 
 export default function Step3() {
   const [activePayment, setActivePayment] = useState<number>(0);
-  const { setValue, watch, control } = useFormContext<FieldValues>();
+  const {
+    setValue,
+    watch,
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useFormContext<FieldValues>();
   const { countBox, packageSelected, activeStep, file, printSide, address } = watch();
+
+  const isDisabledButton = () => {
+    return !isEmptyObject(errors);
+  };
+
+  const submitData = (data: FieldValues) => {
+    console.log('active payment', activePayment);
+    console.log('submit data here', data);
+    setValue('activeStep', activeStep + 1);
+  };
 
   return (
     <div>
@@ -113,7 +138,14 @@ export default function Step3() {
                   <Controller
                     name="recipient.name"
                     control={control}
-                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                    render={({ field, fieldState }) => (
+                      <CustomerTextField
+                        size="small"
+                        {...field}
+                        error={!!fieldState.error?.message}
+                        helperText={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </InputWrapper>
                 <InputWrapper>
@@ -121,7 +153,14 @@ export default function Step3() {
                   <Controller
                     name="recipient.email"
                     control={control}
-                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                    render={({ field, fieldState }) => (
+                      <CustomerTextField
+                        size="small"
+                        {...field}
+                        error={!!fieldState.error?.message}
+                        helperText={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </InputWrapper>
                 <InputWrapper>
@@ -129,7 +168,15 @@ export default function Step3() {
                   <Controller
                     name="recipient.phoneNumber"
                     control={control}
-                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                    render={({ field, fieldState }) => (
+                      <CustomerTextField
+                        size="small"
+                        type="number"
+                        {...field}
+                        error={!!fieldState.error?.message}
+                        helperText={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </InputWrapper>
               </Box>
@@ -142,7 +189,14 @@ export default function Step3() {
                   <Controller
                     name="address.city"
                     control={control}
-                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                    render={({ field, fieldState }) => (
+                      <CustomerTextField
+                        size="small"
+                        {...field}
+                        error={!!fieldState.error?.message}
+                        helperText={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </InputWrapper>
                 <InputWrapper>
@@ -150,7 +204,15 @@ export default function Step3() {
                   <Controller
                     name="address.zipCode"
                     control={control}
-                    render={({ field }) => <CustomerTextField size="small" {...field} />}
+                    render={({ field, fieldState }) => (
+                      <CustomerTextField
+                        size="small"
+                        type="number"
+                        {...field}
+                        error={!!fieldState.error?.message}
+                        helperText={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </InputWrapper>
                 <Box display="flex" mb={2}>
@@ -158,7 +220,12 @@ export default function Step3() {
                   <Controller
                     name="address.fullAddress"
                     control={control}
-                    render={({ field }) => <CustomerTextArea {...field} />}
+                    render={({ field, fieldState }) => (
+                      <FormControl error={!!fieldState.error?.message}>
+                        <CustomerTextArea {...field} />
+                        <FormHelperText>{fieldState.error?.message}</FormHelperText>
+                      </FormControl>
+                    )}
                   />
                 </Box>
                 <Box display="flex" mb={2}>
@@ -209,7 +276,8 @@ export default function Step3() {
                   variant="contained"
                   fullWidth
                   size="large"
-                  onClick={() => setValue('activeStep', activeStep + 1)}>
+                  disabled={isDisabledButton()}
+                  onClick={() => handleSubmit(submitData)()}>
                   Bayar Sekarang
                 </Button>
               </Box>

@@ -11,3 +11,7 @@ export const formatCurrency = (value: number | string) => {
 
   return formatted;
 };
+
+export const isEmptyObject = (obj: Record<any, any>) => {
+  return Object.keys(obj).length === 0;
+};

@@ -25,6 +25,11 @@ export const CustomerTextField = styled(TextField)(() => ({
   },
   '& input': {
     padding: '7px 14px',
+    '&::-webkit-outer-spin-button , &::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0,
+      '-moz-appearance': 'textfield',
+    },
   },
 }));
 

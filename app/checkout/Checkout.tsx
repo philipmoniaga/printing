@@ -27,11 +27,13 @@ export default function Checkout() {
     resetField('printCorner');
     resetField('printSide');
     resetField('countBox');
-    resetField('file');
     resetField('linkUrl');
     resetField('sendByEmail');
     resetField('recipient');
     resetField('address');
+    resetField('sendByEmail');
+    resetField('email');
+    setValue('file', null);
 
     const selectedProduct = PRODUCT.find((data) => data.id === parseInt(params.id as string));
 

@@ -7,10 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import theme from './theme';
 import { FormProvider, useForm } from 'react-hook-form';
+
 import { FieldValues } from './types';
+import useValidation from './useValidation';
 
 export default function ProviderComponent({ children }: { children: React.ReactNode }) {
-  const methods = useForm<FieldValues>({
+  const { schema } = useValidation();
+  const methods = useForm({
     defaultValues: {
       activeStep: 0,
       productSelected: null,
@@ -35,6 +38,7 @@ export default function ProviderComponent({ children }: { children: React.ReactN
         logisticOption: 'regular',
       },
     },
+    resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
