@@ -1,4 +1,4 @@
-import { ProductList, ProductPackageType, ProductPlan } from '../constant/Product/types';
+import { ProductList, ProductPackageType, ProductPlan } from '../../constant/Product/types';
 
 export type FieldValues = {
   activeStep: number;

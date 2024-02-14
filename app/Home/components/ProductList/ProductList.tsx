@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 
-import { PRODUCT, Paths } from '@/app/constant';
+import { PRODUCT, Paths } from '@/constant';
 import { TabPanelProps } from './types';
 import ProductItem from './ProductItem';
 import { FieldValues } from '@/app/Provider/types';

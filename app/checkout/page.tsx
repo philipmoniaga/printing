@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Paths } from '../constant/Paths';
+import { Paths } from '../../constant/Paths';
 
 export default function CheckoutPage() {
   const router = useRouter();

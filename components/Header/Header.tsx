@@ -3,7 +3,7 @@ import { Box, Stack, Button, IconButton } from '@mui/material';
 import { Logo } from '@/icons';
 import { MenuHeader } from './_Header';
 import { useRouter } from 'next/navigation';
-import { Paths } from '@/app/constant';
+import { Paths } from '@/constant';
 import { useState } from 'react';
 import LoginModal from './LoginModal';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';

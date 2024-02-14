@@ -4,12 +4,15 @@ import { Box, Typography } from '@mui/material';
 
 import { ProductWrapper } from './_Step4';
 import { DoneIcon } from '@/icons';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 export default function Step4() {
+  const { isMobile } = useBreakMediaQuery();
+
   return (
     <div>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" mt={5} mb={8}>
-        <Box width="60%">
+        <Box width={isMobile ? '90%' : '60%'}>
           <ProductWrapper mt={6}>
             <Typography textAlign="center" variant="body1" color="white" fontWeight={600} mt={3} mb={2}>
               Pembayaran Selesai
@@ -21,7 +24,8 @@ export default function Step4() {
               borderRadius="8px"
               display="flex"
               alignItems="center"
-              flexDirection="column">
+              flexDirection="column"
+              textAlign="center">
               <DoneIcon />
               <Typography variant="h6" fontWeight="600" mb={2} mt={4}>
                 Pembayaran Berhasil

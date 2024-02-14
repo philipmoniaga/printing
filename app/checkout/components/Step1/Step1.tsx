@@ -9,6 +9,7 @@ import Step from '@/app/Home/components/Step';
 import { ButtonCount, CountWrapper, FavoriteWrapper, ProductItem, ProductWrapper, TabWrapper } from './_Step1';
 import { formatCurrency } from '@/utils/string';
 import { FieldValues } from '@/app/Provider/types';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 const List = [
   {
@@ -29,14 +30,15 @@ const List = [
 ];
 
 export default function Step1() {
+  const { isMobile, isTablet } = useBreakMediaQuery();
   const { setValue, watch, control } = useFormContext<FieldValues>();
   const { productSelected, planSelected, countBox, packageSelected, activeStep } = watch();
 
   return (
     <div>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" mt={5} mb={8}>
-        <Box width="60%">
-          <Box textAlign="center">
+        <Box width={isMobile ? '100%' : '60%'}>
+          <Box textAlign="center" p={isMobile ? 2 : 0}>
             <Typography variant="h5" color="white" fontWeight="600" mb={2}>
               Impresi Tak Terlupakan untuk Klien Potensial Anda.
             </Typography>
@@ -49,11 +51,16 @@ export default function Step1() {
               </Typography>
             </Box>
           </Box>
-          <ProductWrapper mt={6}>
+          <ProductWrapper mt={6} mx={isMobile ? 2 : 0}>
             <Typography textAlign="center" variant="body1" color="white" fontWeight={600} mt={3} mb={2}>
               Pilih Tipe {productSelected?.tab}
             </Typography>
-            <Box display="flex" alignItems="center" justifyContent="center" gap="10px">
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              gap={isMobile ? 0 : '10px'}
+              p={isMobile ? '0 8px' : 0}>
               {productSelected?.plan.map((item, index) => (
                 <TabWrapper
                   active={planSelected?.id === item.id}
@@ -63,12 +70,13 @@ export default function Step1() {
                   onClick={() => {
                     setValue('planSelected', item);
                     setValue('packageSelected', item.packageType[0]);
-                  }}>
+                  }}
+                  sx={isMobile ? { width: '140px', fontSize: '14px', py: '12px', height: '66px' } : {}}>
                   {item.name}
                 </TabWrapper>
               ))}
             </Box>
-            <Box display="flex" padding={3} bgcolor={'white'} borderRadius="8px">
+            <Box display={isTablet ? 'block' : 'flex'} padding={3} bgcolor={'white'} borderRadius="8px">
               <Box>
                 {planSelected?.packageType.map((item, index) => (
                   <ProductItem
@@ -76,25 +84,36 @@ export default function Step1() {
                     key={index}
                     onClick={() => setValue('packageSelected', item)}>
                     <Radio checked={packageSelected?.id === item.id} value={index} />
-                    <Box display="flex" alignItems="center" padding={1}>
+                    <Box display="flex" alignItems="center" padding={1} overflow={'auto'}>
                       <Box position="relative" width="180px" height="120px" mr={3}>
                         <Image src="/assets/splendorgel.svg" alt="splendor" fill />
                       </Box>
                       <Box>
-                        <Box display="flex" alignItems="center" mb={2}>
-                          <Typography fontWeight={600}>{item.name}</Typography>
+                        <Box display="flex" alignItems="center" mb={isMobile ? 1 : 2}>
+                          <Typography fontSize={isMobile ? '12px' : '14px'} fontWeight={600}>
+                            {item.name}
+                          </Typography>
                           {item.isFavorite && <FavoriteWrapper>FAVORIT</FavoriteWrapper>}
                         </Box>
-                        <Typography variant="body2">{item.description}</Typography>
+                        <Typography variant={isMobile ? 'caption' : 'body2'}>{item.description}</Typography>
                       </Box>
                     </Box>
                   </ProductItem>
                 ))}
               </Box>
-              <Box marginLeft={3} width={'40%'}>
+              <Box marginLeft={isTablet ? 0 : 3} width={isTablet ? '100%' : '40%'}>
                 <Box mb={4}>
-                  <FormControl>
-                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                  <FormControl sx={isTablet ? { flexDirection: 'initial' } : {}}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 600,
+                        ...(isTablet && {
+                          position: 'relative',
+                          top: '8px',
+                          minWidth: '120px',
+                        }),
+                      }}>
                       Sisi Cetak
                     </Typography>
 
@@ -120,8 +139,17 @@ export default function Step1() {
                   </FormControl>
                 </Box>
                 <Box mb={4}>
-                  <FormControl>
-                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                  <FormControl sx={isTablet ? { flexDirection: 'initial' } : {}}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 600,
+                        ...(isTablet && {
+                          position: 'relative',
+                          top: '8px',
+                          minWidth: '120px',
+                        }),
+                      }}>
                       Sudut
                     </Typography>
 
@@ -146,8 +174,18 @@ export default function Step1() {
                     />
                   </FormControl>
                 </Box>
-                <Box mb={5}>
-                  <Typography variant="body2" sx={{ fontWeight: 600 }} mb={1}>
+                <Box mb={5} sx={isTablet ? { display: 'flex' } : {}}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 600,
+                      ...(isTablet && {
+                        position: 'relative',
+                        top: '8px',
+                        minWidth: '120px',
+                      }),
+                    }}
+                    mb={1}>
                     Jumlah Kotak
                   </Typography>
                   <Controller

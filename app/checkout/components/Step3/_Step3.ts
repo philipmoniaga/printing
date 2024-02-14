@@ -14,7 +14,7 @@ export const InputWrapper = styled(Box)(() => ({
 }));
 
 export const CustomerTypography = styled(Typography)(() => ({
-  width: '150px',
+  minWidth: '150px',
   fontWeight: '600',
 }));
 
@@ -34,7 +34,7 @@ export const CustomerTextField = styled(TextField)(() => ({
 }));
 
 export const CustomerTextArea = styled(TextareaAutosize)(() => ({
-  width: '500px',
+  maxWidth: '500px',
   height: '80px !important',
   borderRadius: '8px',
   border: '1px solid #C7D0DD',

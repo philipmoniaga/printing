@@ -1,12 +1,6 @@
 import { array, number, object, string } from 'yup';
 
 const useValidation = () => {
-  const validateRequired = (field: string) => {
-    // return t('order.create.form.validate.required', {
-    //   field: capitalizeFirstLetter(field),
-    // });
-  };
-
   const schema = object().shape({
     linkUrl: string().test((val, context) => {
       const { createError } = context;
@@ -36,7 +30,21 @@ const useValidation = () => {
     }),
     recipient: object().shape({
       name: string().required('Wajib diisi'),
-      email: string().required('Wajib diisi'),
+      email: string()
+        .required('Wajib diisi')
+        .test((val, context) => {
+          const { createError } = context;
+          const regexEmail =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (val && regexEmail.test(val as string) === false) {
+            return createError({
+              path: 'recipient.email',
+              message: 'Format Email tidak valid',
+            });
+          }
+
+          return true;
+        }),
       phoneNumber: string()
         .required('Wajib diisi')
         .test((val, context) => {

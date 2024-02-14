@@ -6,8 +6,11 @@ import { useFormContext, Controller } from 'react-hook-form';
 import { ProductWrapper, VisuallyHiddenInput } from './_Step2';
 import { UploadIcon } from '@/icons';
 import { FieldValues } from '@/app/Provider/types';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 export default function Step2() {
+  const { isMobile } = useBreakMediaQuery();
+
   const {
     setValue,
     watch,
@@ -30,12 +33,12 @@ export default function Step2() {
   return (
     <div>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" mt={5} mb={8}>
-        <Box width="60%">
+        <Box width={isMobile ? '90%' : '60%'}>
           <ProductWrapper mt={6}>
             <Typography textAlign="center" variant="body1" color="white" fontWeight={600} mt={3} mb={2}>
               Upload Desainmu
             </Typography>
-            <Box padding={3} bgcolor={'white'} borderRadius="8px">
+            <Box padding={3} pb={0} bgcolor={'white'} borderRadius="8px">
               <Box position="relative" border="1px dashed #3A86FF" borderRadius="8px" bgcolor="#E8EEF8" py={4} mb={4}>
                 {!file ? (
                   <Box margin="auto" display="flex" flexDirection="column" alignItems="center">
@@ -117,6 +120,7 @@ export default function Step2() {
                       <TextField
                         variant="standard"
                         disabled={!sendByEmail}
+                        placeholder="Email"
                         {...field}
                         error={!!fieldState.error?.message}
                         helperText={fieldState.error?.message}
@@ -127,7 +131,7 @@ export default function Step2() {
               </Box>
             </Box>
             <Box>
-              <Box marginX={3} paddingY={3} borderTop={'1px solid #D4D4D4'}>
+              <Box marginX={3} paddingY={3}>
                 <Button
                   variant="contained"
                   fullWidth

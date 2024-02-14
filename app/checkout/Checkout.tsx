@@ -6,7 +6,7 @@ import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 import { useParams } from 'next/navigation';
-import { PRODUCT } from '../constant';
+import { PRODUCT } from '../../constant';
 import { useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
 

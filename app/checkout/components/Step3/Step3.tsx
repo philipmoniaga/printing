@@ -9,6 +9,7 @@ import {
   Radio,
   FormControl,
   FormHelperText,
+  Divider,
 } from '@mui/material';
 
 import {
@@ -23,6 +24,7 @@ import { useMemo, useState } from 'react';
 import { formatCurrency, isEmptyObject } from '@/utils/string';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 const Payment = [
   {
@@ -44,6 +46,8 @@ const Payment = [
 ];
 
 export default function Step3() {
+  const { isMobile } = useBreakMediaQuery();
+
   const [activePayment, setActivePayment] = useState<number>(0);
   const {
     setValue,
@@ -64,39 +68,41 @@ export default function Step3() {
     setValue('activeStep', activeStep + 1);
   };
 
+  console.log('errors', errors);
+
   return (
     <div>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" mt={5} mb={8}>
-        <Box width="60%">
+        <Box width={isMobile ? '90%' : '60%'}>
           <ProductWrapper mt={6}>
             <Typography textAlign="center" variant="body1" color="white" fontWeight={600} mt={3} mb={2}>
               Ringkasan Pesanan
             </Typography>
             <Box padding={3} bgcolor={'white'} borderRadius="8px">
-              <Box display="flex" borderBottom={'2px solid #D4D4D4'} mb={4} pb={2}>
-                <Box width="50%">
+              <Box display={isMobile ? 'block' : 'flex'} borderBottom={'2px solid #D4D4D4'} mb={4} pb={2}>
+                <Box width={isMobile ? '100%' : '50%'}>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Tipe Kartu Nama</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Tipe Kartu Nama</CustomerTypography>
                     <Typography variant="body2">: {packageSelected?.name}</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Sisi Cetak</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Sisi Cetak</CustomerTypography>
                     <Typography variant="body2">: {printSide} Sisi</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Laminating</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Laminating</CustomerTypography>
                     <Typography variant="body2">: Tidak</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Finishing</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Finishing</CustomerTypography>
                     <Typography variant="body2">: Tidak</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Jumlah Kotak</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Jumlah Kotak</CustomerTypography>
                     <Typography variant="body2">: {countBox}</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">File Desain</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>File Desain</CustomerTypography>
                     <Typography variant="body2">
                       :{' '}
                       <Typography component="span" variant="body2" color="primary">
@@ -104,27 +110,28 @@ export default function Step3() {
                       </Typography>
                     </Typography>
                   </InputWrapper>
+                  {isMobile && <Divider sx={{ my: 2 }} />}
                 </Box>
-                <Box width="50%">
+                <Box width={isMobile ? '100%' : '50%'}>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Sub Total</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Sub Total</CustomerTypography>
                     <Typography variant="body2">: {formatCurrency(packageSelected?.price as string)}</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Biaya Kirim</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Biaya Kirim</CustomerTypography>
                     <Typography variant="body2">: {formatCurrency(0)}</Typography>
                   </InputWrapper>
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Diskon</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Diskon</CustomerTypography>
                     <Typography variant="body2">: {formatCurrency(0)}</Typography>
                   </InputWrapper>
                   <InputWrapper sx={{ marginBottom: '10px' }}>
-                    <CustomerTypography variant="body2">Diskon</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Diskon</CustomerTypography>
                     <CustomerTextField size="small" placeholder="Input Kode Promo" sx={{ width: '160px' }} />
                   </InputWrapper>
-                  <Box width={'100%'} borderBottom={'1px solid #D4D4D4'} mb={1} pb={1} />
+                  <Divider sx={{ my: 1, py: 1 }} />
                   <InputWrapper>
-                    <CustomerTypography variant="body2">Grand Total</CustomerTypography>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Grand Total</CustomerTypography>
                     <Typography variant="h6">{formatCurrency(packageSelected?.price as string)}</Typography>
                   </InputWrapper>
                 </Box>
@@ -134,7 +141,7 @@ export default function Step3() {
                   Informasi Penerima
                 </Typography>
                 <InputWrapper>
-                  <CustomerTypography variant="body2">Nama</CustomerTypography>
+                  <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Nama</CustomerTypography>
                   <Controller
                     name="recipient.name"
                     control={control}
@@ -149,7 +156,7 @@ export default function Step3() {
                   />
                 </InputWrapper>
                 <InputWrapper>
-                  <CustomerTypography variant="body2">Email</CustomerTypography>
+                  <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Email</CustomerTypography>
                   <Controller
                     name="recipient.email"
                     control={control}
@@ -164,7 +171,7 @@ export default function Step3() {
                   />
                 </InputWrapper>
                 <InputWrapper>
-                  <CustomerTypography variant="body2">Nomor Handphone</CustomerTypography>
+                  <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Nomor Handphone</CustomerTypography>
                   <Controller
                     name="recipient.phoneNumber"
                     control={control}
@@ -185,7 +192,7 @@ export default function Step3() {
                   Alamat Pengiriman
                 </Typography>
                 <InputWrapper>
-                  <CustomerTypography variant="body2">Kota / Kecamatan*</CustomerTypography>
+                  <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Kota / Kecamatan*</CustomerTypography>
                   <Controller
                     name="address.city"
                     control={control}
@@ -200,7 +207,7 @@ export default function Step3() {
                   />
                 </InputWrapper>
                 <InputWrapper>
-                  <CustomerTypography variant="body2">Kode Pos*</CustomerTypography>
+                  <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Kode Pos*</CustomerTypography>
                   <Controller
                     name="address.zipCode"
                     control={control}
@@ -215,21 +222,25 @@ export default function Step3() {
                     )}
                   />
                 </InputWrapper>
-                <Box display="flex" mb={2}>
-                  <CustomerTypography variant="body2">Alamat Lengkap*</CustomerTypography>
+                <InputWrapper sx={{ alignItems: 'start' }}>
+                  <Box minWidth={'150px'}>
+                    <CustomerTypography variant={isMobile ? 'caption' : 'body2'} sx={isMobile ? { width: '90px' } : {}}>
+                      Alamat Lengkap*
+                    </CustomerTypography>
+                  </Box>
                   <Controller
                     name="address.fullAddress"
                     control={control}
                     render={({ field, fieldState }) => (
-                      <FormControl error={!!fieldState.error?.message}>
-                        <CustomerTextArea {...field} />
+                      <FormControl error={!!fieldState.error?.message} fullWidth>
+                        <CustomerTextArea {...field} sx={isMobile ? { width: '100%' } : {}} />
                         <FormHelperText>{fieldState.error?.message}</FormHelperText>
                       </FormControl>
                     )}
                   />
-                </Box>
+                </InputWrapper>
                 <Box display="flex" mb={2}>
-                  <CustomerTypography variant="body2" mt="10px">
+                  <CustomerTypography variant={isMobile ? 'caption' : 'body2'} mt="10px">
                     Opsi Pengiriman
                   </CustomerTypography>
                   <Controller
@@ -257,9 +268,12 @@ export default function Step3() {
                 <Typography variant="body1" fontWeight="600" mb={2}>
                   Pilih Metode Pembayaran (Tanpa Biaya Transaksi)
                 </Typography>
-                <Box display="flex" gap="16px">
+                <Box display={isMobile ? 'block' : 'flex'} gap="16px">
                   {Payment.map((item, index) => (
-                    <PaymentBox key={index} onClick={() => setActivePayment(index)}>
+                    <PaymentBox
+                      key={index}
+                      onClick={() => setActivePayment(index)}
+                      sx={isMobile ? { width: '100%', mb: 2 } : {}}>
                       <Radio checked={activePayment === index} size={'small'} />
                       <Typography variant="body2" fontWeight="600">
                         {item.label}

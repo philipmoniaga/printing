@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 
 import { FieldValues } from '@/app/Provider/types';
-import { Paths } from '@/app/constant';
-import { ProductPlan } from '@/app/constant/Product/types';
+import { Paths } from '@/constant';
+import { ProductPlan } from '@/constant/Product/types';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 

@@ -51,7 +51,7 @@ export const CountWrapper = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  maxWidth: '120px',
+  width: '120px',
 }));
 
 export const ButtonCount = styled(Button)(() => ({
