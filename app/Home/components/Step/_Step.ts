@@ -22,3 +22,13 @@ export const StepLine = styled(Box)({
   top: '23px',
   zIndex: -1,
 });
+
+export const StepLineVertical = styled(Box)({
+  position: 'absolute',
+  borderLeft: '2px solid #C27EE2',
+  height: '90%',
+  top: 0,
+  bottom: 0,
+  left: '25px',
+  zIndex: -1,
+});

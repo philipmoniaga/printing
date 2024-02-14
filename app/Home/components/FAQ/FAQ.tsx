@@ -1,8 +1,11 @@
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { FaqContainer } from './_FAQ';
 import { Add } from '@mui/icons-material';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 const FAQ = () => {
+  const { isMobile } = useBreakMediaQuery();
+
   const FAQ_LIST = [
     {
       title: 'Bagaimana cara ordernya?',
@@ -33,7 +36,7 @@ const FAQ = () => {
 
   return (
     <FaqContainer>
-      <Box width="70%" margin="auto">
+      <Box width={isMobile ? '100%' : '70%'} margin="auto">
         <Box>
           <Box textAlign="center" paddingBottom="40px" borderBottom="2px solid white">
             <Typography color="white" variant="subtitle1" fontWeight="600">

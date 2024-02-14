@@ -1,13 +1,20 @@
+'use client';
 import { Box, Typography, Grid, Stack } from '@mui/material';
 import { FooterContainer, FooterWrapper, FooterTitle } from './_Footer';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 const Footer = () => {
+  const { isTablet } = useBreakMediaQuery();
+
   return (
     <FooterContainer>
-      <FooterWrapper>
+      <FooterWrapper
+        {...(isTablet && {
+          sx: { width: '100%', padding: 0 },
+        })}>
         <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Box width="400px">
+          <Grid item xs={isTablet ? 12 : 8}>
+            <Box width={isTablet ? '100%' : '400px'}>
               <FooterTitle variant="body1" color="#3A86FF" marginBottom="14px">
                 PercetakanKami.net
               </FooterTitle>
@@ -17,7 +24,7 @@ const Footer = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={isTablet ? 6 : 2} mb={isTablet ? 2 : 0}>
             <Stack gap="10px">
               <FooterTitle variant="body1" color="#929FAC">
                 Media Sosial
@@ -28,7 +35,7 @@ const Footer = () => {
               <Typography>Facebook</Typography>
             </Stack>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={isTablet ? 6 : 2}>
             <Stack gap="10px">
               <FooterTitle variant="body1" color="#929FAC">
                 Menu

@@ -9,6 +9,7 @@ import { PRODUCT, Paths } from '@/app/constant';
 import { TabPanelProps } from './types';
 import ProductItem from './ProductItem';
 import { FieldValues } from '@/app/Provider/types';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -22,7 +23,8 @@ function CustomTabPanel(props: TabPanelProps) {
 
 export default function ProductList() {
   const router = useRouter();
-  const { watch, setValue, resetField } = useFormContext<FieldValues>();
+  const { setValue } = useFormContext<FieldValues>();
+  const { isMobile } = useBreakMediaQuery();
 
   const [valueTab, setValueTab] = useState<number>(0);
 
@@ -35,7 +37,7 @@ export default function ProductList() {
       <Typography variant="body1" fontWeight="600" mb={5}>
         Pilih produk sesuai dengan kebutuhan anda.
       </Typography>
-      <Box sx={{ width: '70%' }}>
+      <Box width={isMobile ? '100%' : '70%'}>
         <Box marginBottom={4}>
           <Tabs value={valueTab} onChange={handleChange} centered>
             {PRODUCT.map((item, index) => (
@@ -43,7 +45,7 @@ export default function ProductList() {
             ))}
           </Tabs>
         </Box>
-        <Box width="60%" margin="auto">
+        <Box width={isMobile ? '90%' : '60%'} margin="auto">
           {PRODUCT.map((item, index) => (
             <CustomTabPanel value={valueTab} index={index} key={index}>
               <ProductItem id={item.id} plan={item.plan} />

@@ -7,6 +7,7 @@ import { FieldValues } from '@/app/Provider/types';
 import { Paths } from '@/app/constant';
 import { ProductPlan } from '@/app/constant/Product/types';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 
 type Props = {
   id: number;
@@ -15,15 +16,27 @@ type Props = {
 
 export default function ProductItem({ id, plan }: Props) {
   const { setValue } = useFormContext<FieldValues>();
+  const { isTablet } = useBreakMediaQuery();
 
   const router = useRouter();
   return (
     <>
-      <Box display="flex" justifyContent="center" gap="24px">
+      <Box
+        {...(isTablet
+          ? {
+              textAlign: 'center',
+              width: '100%',
+            }
+          : { display: 'flex', justifyContent: 'center', gap: '24px' })}>
         {plan.map((item: ProductPlan, index: number) => (
-          <Stack key={index} justifyContent="space-between" bgcolor="#F8FBFF" width="240px">
+          <Stack
+            key={index}
+            justifyContent="space-between"
+            bgcolor="#F8FBFF"
+            mb={isTablet ? 4 : 0}
+            width={isTablet ? '100%' : '240px'}>
             <Box textAlign="center" width="100%">
-              <Box position="relative" width="100%" height="110px" margin="auto">
+              <Box position="relative" width="100%" height={isTablet ? '200px' : '110px'} margin="auto">
                 <Image src={item.image} alt={item.name} fill />
               </Box>
               <Box mt={2}>
