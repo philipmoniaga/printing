@@ -18,7 +18,7 @@ export default function Step2() {
     formState: { errors },
     clearErrors,
   } = useFormContext<FieldValues>();
-  const { activeStep, file, sendByEmail } = watch();
+  const { activeStep, file, sendByEmail, email } = watch();
 
   const handleUpload = (files: any) => {
     const maxSize = 10 * 1024 * 1024; // 10 MB in bytes
@@ -136,7 +136,7 @@ export default function Step2() {
                   variant="contained"
                   fullWidth
                   size="large"
-                  disabled={!!(errors.linkUrl || (errors.email && sendByEmail))}
+                  disabled={!!(errors.linkUrl || (errors.email && sendByEmail)) || (sendByEmail && !email)}
                   onClick={() => {
                     clearErrors();
                     setValue('activeStep', activeStep + 1);

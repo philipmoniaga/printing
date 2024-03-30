@@ -13,7 +13,7 @@ import useValidation from './useValidation';
 
 export default function ProviderComponent({ children }: { children: React.ReactNode }) {
   const { schema } = useValidation();
-  const methods = useForm({
+  const methods = useForm<FieldValues>({
     defaultValues: {
       activeStep: 0,
       productSelected: null,

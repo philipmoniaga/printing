@@ -1,7 +1,11 @@
-import { array, number, object, string } from 'yup';
+import { array, boolean, number, object, string } from 'yup';
 
 const useValidation = () => {
   const schema = object().shape({
+    activeStep: number().required(),
+    printSide: string().required(),
+    printCorner: string().oneOf(['standard', 'corner']).required(),
+    countBox: number().required(),
     linkUrl: string().test((val, context) => {
       const { createError } = context;
       const regexUrl =
@@ -15,6 +19,7 @@ const useValidation = () => {
 
       return true;
     }),
+    sendByEmail: boolean().required(),
     email: string().test((val, context) => {
       const { createError } = context;
       const regexEmail =
@@ -60,12 +65,14 @@ const useValidation = () => {
           return true;
         }),
     }),
-    address: object().shape({
-      city: string().required('Wajib diisi'),
-      zipCode: string().required('Wajib diisi'),
-      fullAddress: string().required('Wajib diisi'),
-      logisticOption: string(),
-    }),
+    address: object()
+      .shape({
+        city: string().required('Wajib diisi'),
+        zipCode: string().required('Wajib diisi'),
+        fullAddress: string().required('Wajib diisi'),
+        logisticOption: string().oneOf(['regular', 'express']).required(),
+      })
+      .required(),
   });
 
   return {

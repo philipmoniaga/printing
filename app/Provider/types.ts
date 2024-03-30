@@ -2,16 +2,16 @@ import { ProductList, ProductPackageType, ProductPlan } from '../../constant/Pro
 
 export type FieldValues = {
   activeStep: number;
-  productSelected: ProductList | null;
-  planSelected: ProductPlan | null;
-  packageSelected: ProductPackageType | null;
+  productSelected?: ProductList | null;
+  planSelected?: ProductPlan | null;
+  packageSelected?: ProductPackageType | null;
   printSide: string;
   printCorner: 'standard' | 'corner';
   countBox: number;
-  file: null | any;
-  linkUrl: string;
+  file?: null | any;
+  linkUrl?: string;
   sendByEmail: boolean;
-  email: string;
+  email?: string;
   recipient: {
     name: string;
     email: string;
