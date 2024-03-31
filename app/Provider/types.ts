@@ -1,4 +1,4 @@
-import { ProductList, ProductPackageType, ProductPlan } from '../../constant/Product/types';
+import { ProductList, ProductPackageType, ProductPlan } from '@/pages/api/product/types';
 
 export type FieldValues = {
   activeStep: number;
@@ -6,7 +6,8 @@ export type FieldValues = {
   planSelected?: ProductPlan | null;
   packageSelected?: ProductPackageType | null;
   printSide: string;
-  printCorner: 'standard' | 'corner';
+  printCorner: 'standard' | 'round';
+  totalPrice: number;
   countBox: number;
   file?: null | any;
   linkUrl?: string;

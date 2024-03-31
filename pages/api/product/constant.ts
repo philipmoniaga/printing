@@ -1,6 +1,4 @@
-import { ProductList } from './types';
-
-export const PRODUCT = [
+export const PRODUCT_DATA = [
   {
     id: 1,
     tab: 'Kartu Nama',
@@ -28,14 +26,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -46,14 +45,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -64,14 +64,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -102,14 +103,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -120,14 +122,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -138,14 +141,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -176,14 +180,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -194,14 +199,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -212,14 +218,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -256,14 +263,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -274,14 +282,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -292,14 +301,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -330,14 +340,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -348,14 +359,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -366,14 +378,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -404,14 +417,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -422,14 +436,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -440,14 +455,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -484,14 +500,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -502,14 +519,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -520,14 +538,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -558,14 +577,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -576,14 +596,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -594,14 +615,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -632,14 +654,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -650,14 +673,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -668,14 +692,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -712,14 +737,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -730,14 +756,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -748,14 +775,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -786,14 +814,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -804,14 +833,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -822,14 +852,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -860,14 +891,15 @@ export const PRODUCT = [
             name: 'Splendorgel',
             image: '/assets/splendorgel.svg',
             isFavorite: true,
-            price: '80000',
             description: 'Kertas Premium dari Italia. Sangat halus dan warna terlihat sangat cerah pada kertas ini.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -878,14 +910,15 @@ export const PRODUCT = [
             name: 'Nettuno',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '60000',
             description: 'Kertas Premium dari Italia. Kaku dan memiliki tekstur seperti serat kayu yang halus.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -896,14 +929,15 @@ export const PRODUCT = [
             name: 'Tintoretto',
             image: '/assets/splendorgel.svg',
             isFavorite: false,
-            price: '70000',
             description: 'Kertas Premium dari Italia. Memiliki tekstur bergelombang menyerupai kulit buah jambu.',
             printSide: [
               {
+                id: 1,
                 name: '1 Sisi',
                 price: '70000',
               },
               {
+                id: 2,
                 name: '2 Sisi',
                 price: '90000',
               },
@@ -913,4 +947,4 @@ export const PRODUCT = [
       },
     ],
   },
-] as ProductList[];
+];

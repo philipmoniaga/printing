@@ -1,14 +1,15 @@
 'use client';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 import { useParams } from 'next/navigation';
-import { PRODUCT } from '../../constant';
 import { useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
+import { ProductList } from '@/pages/api/product/types';
+import { axiosClientHandler } from '@/utils/axios';
 
 const CHECKOUT_PAGE = {
   0: Step1,
@@ -21,6 +22,22 @@ export default function Checkout() {
   const params = useParams();
   const { setValue, watch, resetField } = useFormContext<FieldValues>();
   const { planSelected, productSelected, activeStep } = watch();
+
+  const [listProduct, setListProduct] = useState<ProductList[]>([]);
+
+  const getProduct = useCallback(async () => {
+    try {
+      const getProductList = await axiosClientHandler.get(`/api/product`);
+      const { data } = getProductList;
+      setListProduct(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getProduct();
+  }, [getProduct]);
 
   useEffect(() => {
     setValue('activeStep', 0);
@@ -35,14 +52,14 @@ export default function Checkout() {
     resetField('email');
     setValue('file', null);
 
-    const selectedProduct = PRODUCT.find((data) => data.id === parseInt(params.id as string));
+    const selectedProduct = listProduct.find((data) => data.id === parseInt(params?.id as string));
 
     if (selectedProduct) {
       setValue('productSelected', selectedProduct);
     } else {
-      setValue('productSelected', PRODUCT[0]);
+      setValue('productSelected', listProduct[0]);
     }
-  }, [params.id, setValue, resetField]);
+  }, [params?.id, setValue, resetField, listProduct]);
 
   useEffect(() => {
     if (!planSelected && productSelected) {

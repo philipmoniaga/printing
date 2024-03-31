@@ -1,15 +1,17 @@
 'use client';
 
 import { Box, Button, Tab, Tabs, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 
-import { PRODUCT, Paths } from '@/constant';
+import { Paths } from '@/constant';
 import { TabPanelProps } from './types';
 import ProductItem from './ProductItem';
 import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
+import { ProductList } from '@/pages/api/product/types';
+import { axiosClientHandler } from '@/utils/axios';
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -32,6 +34,23 @@ export default function ProductList() {
     setValueTab(newValue);
   };
 
+  const [listProduct, setListProduct] = useState<ProductList[]>([]);
+
+  const getProduct = useCallback(async () => {
+    try {
+      const getProductList = await axiosClientHandler.get(`/api/product`);
+      const { data } = getProductList;
+
+      setListProduct(data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getProduct();
+  }, [getProduct]);
+
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Typography variant="body1" fontWeight="600" mb={5}>
@@ -40,13 +59,13 @@ export default function ProductList() {
       <Box width={isMobile ? '100%' : '70%'}>
         <Box marginBottom={4}>
           <Tabs value={valueTab} onChange={handleChange} centered>
-            {PRODUCT.map((item, index) => (
+            {listProduct.map((item, index) => (
               <Tab label={item.tab} key={index} sx={{ borderBottom: 1, borderColor: 'divider', fontWeight: 600 }} />
             ))}
           </Tabs>
         </Box>
         <Box width={isMobile ? '90%' : '60%'} margin="auto">
-          {PRODUCT.map((item, index) => (
+          {listProduct.map((item, index) => (
             <CustomTabPanel value={valueTab} index={index} key={index}>
               <ProductItem id={item.id} plan={item.plan} />
             </CustomTabPanel>

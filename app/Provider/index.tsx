@@ -21,6 +21,7 @@ export default function ProviderComponent({ children }: { children: React.ReactN
       packageSelected: null,
       printSide: '1',
       printCorner: 'standard',
+      totalPrice: 0,
       countBox: 1,
       file: null,
       linkUrl: '',

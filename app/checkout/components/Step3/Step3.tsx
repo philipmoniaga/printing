@@ -20,11 +20,13 @@ import {
   PaymentBox,
   ProductWrapper,
 } from './_Step3';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { formatCurrency, isEmptyObject } from '@/utils/string';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
+import axios from 'axios';
+import { axiosClientHandler } from '@/utils/axios';
 
 const Payment = [
   {
@@ -56,19 +58,57 @@ export default function Step3() {
     formState: { errors },
     handleSubmit,
   } = useFormContext<FieldValues>();
-  const { countBox, packageSelected, activeStep, file, printSide, address } = watch();
+  const { countBox, packageSelected, activeStep, file, printSide, totalPrice } = watch();
 
   const isDisabledButton = () => {
     return !isEmptyObject(errors);
   };
 
-  const submitData = (data: FieldValues) => {
-    console.log('active payment', activePayment);
-    console.log('submit data here', data);
-    setValue('activeStep', activeStep + 1);
-  };
+  const submitData = async (data: FieldValues) => {
+    const {
+      productSelected,
+      planSelected,
+      packageSelected,
+      printSide,
+      printCorner,
+      countBox,
+      totalPrice,
+      email,
+      file,
+      linkUrl,
+      address,
+      recipient,
+    } = data;
 
-  console.log('errors', errors);
+    try {
+      const payload = {
+        product: productSelected?.tab,
+        plan: planSelected?.name,
+        package: packageSelected?.name,
+        print_side: printSide,
+        print_corner: printCorner,
+        amount: countBox,
+        price: totalPrice,
+        file_url: '',
+        link_url: linkUrl,
+        sender_email: email,
+        recipient_name: recipient.name,
+        recipient_email: recipient.email,
+        recipient_phone: recipient.phoneNumber,
+        address_city: address.city,
+        zipcode: address.zipCode,
+        address_full: address.fullAddress,
+        send_option: address.logisticOption,
+        payment_method: '',
+        // payment_method: activePayment,
+      };
+      await axiosClientHandler.post('/api/order/create-order', payload);
+
+      setValue('activeStep', activeStep + 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -132,7 +172,7 @@ export default function Step3() {
                   <Divider sx={{ my: 1, py: 1 }} />
                   <InputWrapper>
                     <CustomerTypography variant={isMobile ? 'caption' : 'body2'}>Grand Total</CustomerTypography>
-                    <Typography variant="h6">{formatCurrency(packageSelected?.price as string)}</Typography>
+                    <Typography variant="h6">{formatCurrency(totalPrice)}</Typography>
                   </InputWrapper>
                 </Box>
               </Box>

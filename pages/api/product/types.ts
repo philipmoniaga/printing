@@ -29,6 +29,7 @@ export interface ProductPackageType {
 }
 
 export interface ProductPackagePrintSide {
+  id: number;
   name: string;
   price: string;
 }

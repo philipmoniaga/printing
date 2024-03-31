@@ -4,7 +4,8 @@ const useValidation = () => {
   const schema = object().shape({
     activeStep: number().required(),
     printSide: string().required(),
-    printCorner: string().oneOf(['standard', 'corner']).required(),
+    printCorner: string().oneOf(['standard', 'round']).required(),
+    totalPrice: number().required(),
     countBox: number().required(),
     linkUrl: string().test((val, context) => {
       const { createError } = context;

@@ -10,6 +10,7 @@ import { ButtonCount, CountWrapper, FavoriteWrapper, ProductItem, ProductWrapper
 import { formatCurrency } from '@/utils/string';
 import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
+import { useMemo } from 'react';
 
 const List = [
   {
@@ -32,7 +33,20 @@ const List = [
 export default function Step1() {
   const { isMobile, isTablet } = useBreakMediaQuery();
   const { setValue, watch, control } = useFormContext<FieldValues>();
-  const { productSelected, planSelected, countBox, packageSelected, activeStep } = watch();
+  const { productSelected, planSelected, countBox, packageSelected, activeStep, printCorner, printSide } = watch();
+
+  const totalPrice = useMemo(() => {
+    const findPackage = packageSelected?.printSide.find((data) => data.id === parseInt(printSide));
+
+    const printSideValue = parseInt(`${findPackage?.price}`) || 0;
+    const printCornerValue = printCorner === 'round' ? 15000 : 0;
+
+    const totalPrice = (printCornerValue + printSideValue) * countBox;
+
+    setValue('totalPrice', totalPrice);
+
+    return totalPrice;
+  }, [packageSelected, countBox, printCorner, printSide, setValue]);
 
   return (
     <div>
@@ -122,17 +136,18 @@ export default function Step1() {
                       control={control}
                       render={({ field }) => (
                         <RadioGroup {...field}>
-                          <FormControlLabel
-                            value="1"
-                            control={<Radio size={'small'} />}
-                            label={<Typography variant="caption">1 Sisi (Rp70.000)</Typography>}
-                          />
-                          <FormControlLabel
-                            sx={{ fontSize: '10px' }}
-                            value="2"
-                            control={<Radio size={'small'} />}
-                            label={<Typography variant="caption">2 Sisi (Rp90.000)</Typography>}
-                          />
+                          {packageSelected?.printSide.map((item, index) => (
+                            <FormControlLabel
+                              key={index}
+                              value={item.id}
+                              control={<Radio size={'small'} />}
+                              label={
+                                <Typography variant="caption">
+                                  {item.name} ({formatCurrency(item.price)})
+                                </Typography>
+                              }
+                            />
+                          ))}
                         </RadioGroup>
                       )}
                     />
@@ -212,7 +227,7 @@ export default function Step1() {
                     Harga Total
                   </Typography>
                   <Typography fontWeight={600} variant="h5">
-                    {formatCurrency(packageSelected?.price || '0')}
+                    {formatCurrency(totalPrice || '0')}
                   </Typography>
                 </Box>
               </Box>
