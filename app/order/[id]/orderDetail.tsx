@@ -24,9 +24,7 @@ export default function OrderDetail() {
     try {
       if (!params?.id) return;
       const getOrderDetail = await axiosClientHandler.get(`/api/order/${params.id}`);
-      const {
-        data: { data },
-      } = getOrderDetail;
+      const { data } = getOrderDetail;
 
       setOrder(data);
     } catch (error) {
