@@ -10,6 +10,7 @@ import { useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
 import { ProductList } from '@/pages/api/product/types';
 import { axiosClientHandler } from '@/utils/axios';
+import LoadingBar from 'react-top-loading-bar';
 
 const CHECKOUT_PAGE = {
   0: Step1,
@@ -22,6 +23,7 @@ export default function Checkout() {
   const params = useParams();
   const { setValue, watch, resetField } = useFormContext<FieldValues>();
   const { planSelected, productSelected, activeStep } = watch();
+  const [progress, setProgress] = useState(0);
 
   const [listProduct, setListProduct] = useState<ProductList[]>([]);
 
@@ -70,9 +72,14 @@ export default function Checkout() {
 
   const Content = CHECKOUT_PAGE[activeStep];
 
+  const setProgressLoading = (value: number) => {
+    setProgress(value);
+  };
+
   return (
     <div>
-      <Content />
+      <LoadingBar color="#3A86FF" progress={progress} onLoaderFinished={() => setProgress(0)} />
+      <Content setProgressLoading={setProgressLoading} />
     </div>
   );
 }

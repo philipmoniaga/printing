@@ -25,8 +25,8 @@ import { formatCurrency, isEmptyObject } from '@/utils/string';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
-import axios from 'axios';
 import { axiosClientHandler } from '@/utils/axios';
+import { CheckoutProps } from '../../types';
 
 const Payment = [
   {
@@ -47,7 +47,7 @@ const Payment = [
   },
 ];
 
-export default function Step3() {
+export default function Step3({ setProgressLoading }: CheckoutProps) {
   const { isMobile } = useBreakMediaQuery();
 
   const [activePayment, setActivePayment] = useState<number>(0);
@@ -65,6 +65,7 @@ export default function Step3() {
   };
 
   const submitData = async (data: FieldValues) => {
+    setProgressLoading(20);
     const {
       productSelected,
       planSelected,
@@ -81,6 +82,7 @@ export default function Step3() {
     } = data;
 
     try {
+      setProgressLoading(40);
       const payload = {
         product: productSelected?.tab,
         plan: planSelected?.name,
@@ -108,6 +110,8 @@ export default function Step3() {
     } catch (error) {
       console.error(error);
     }
+
+    setProgressLoading(100);
   };
 
   return (

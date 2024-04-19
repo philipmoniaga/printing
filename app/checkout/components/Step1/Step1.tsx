@@ -11,6 +11,7 @@ import { formatCurrency } from '@/utils/string';
 import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 import { useMemo } from 'react';
+import { CheckoutProps } from '../../types';
 
 const List = [
   {
@@ -30,7 +31,7 @@ const List = [
   },
 ];
 
-export default function Step1() {
+export default function Step1({ setProgressLoading }: CheckoutProps) {
   const { isMobile, isTablet } = useBreakMediaQuery();
   const { setValue, watch, control } = useFormContext<FieldValues>();
   const { productSelected, planSelected, countBox, packageSelected, activeStep, printCorner, printSide } = watch();
@@ -238,7 +239,10 @@ export default function Step1() {
                   variant="contained"
                   fullWidth
                   size="large"
-                  onClick={() => setValue('activeStep', activeStep + 1)}>
+                  onClick={() => {
+                    setValue('activeStep', activeStep + 1);
+                    setProgressLoading(100);
+                  }}>
                   Selanjutnya
                 </Button>
               </Box>

@@ -9,8 +9,9 @@ import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
 import { createClient } from '@supabase/supabase-js';
 import { useState } from 'react';
+import { CheckoutProps } from '../../types';
 
-export default function Step2() {
+export default function Step2({ setProgressLoading }: CheckoutProps) {
   const { isMobile } = useBreakMediaQuery();
 
   const supabaseClient = createClient(
@@ -35,7 +36,7 @@ export default function Step2() {
       alert('Ukuran file melebihi 10 MB.');
       return;
     }
-
+    setProgressLoading(20);
     const file = files[0];
     try {
       setLoading(true);
@@ -61,6 +62,7 @@ export default function Step2() {
       setLoading(false);
       throw error;
     }
+    setProgressLoading(100);
   };
 
   return (
@@ -173,6 +175,7 @@ export default function Step2() {
                   onClick={() => {
                     clearErrors();
                     setValue('activeStep', activeStep + 1);
+                    setProgressLoading(100);
                   }}>
                   Selanjutnya
                 </Button>
