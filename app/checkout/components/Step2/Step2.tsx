@@ -7,9 +7,16 @@ import { ProductWrapper, VisuallyHiddenInput } from './_Step2';
 import { UploadIcon } from '@/icons';
 import { FieldValues } from '@/app/Provider/types';
 import useBreakMediaQuery from '@/hooks/useBreakMediaQuery';
+import { createClient } from '@supabase/supabase-js';
+import { useState } from 'react';
 
 export default function Step2() {
   const { isMobile } = useBreakMediaQuery();
+
+  const supabaseClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+    process.env.NEXT_PUBLIC_SUPABASE_KEY as string
+  );
 
   const {
     setValue,
@@ -19,15 +26,41 @@ export default function Step2() {
     clearErrors,
   } = useFormContext<FieldValues>();
   const { activeStep, file, sendByEmail, email } = watch();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleUpload = (files: any) => {
+  File;
+  const handleUpload = async (files: any) => {
     const maxSize = 10 * 1024 * 1024; // 10 MB in bytes
     if (files.length > 0 && files[0].size > maxSize) {
       alert('Ukuran file melebihi 10 MB.');
       return;
     }
 
-    setValue('file', files[0]);
+    const file = files[0];
+    try {
+      setLoading(true);
+      const fileName = `${file.name}-${Date.now()}`;
+      const { data, error } = await supabaseClient.storage.from('design').upload(`File/${fileName}`, file, {
+        contentType: file.type,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      const {
+        data: { publicUrl },
+      } = supabaseClient.storage.from('design').getPublicUrl('File');
+
+      const fileUrl = `${publicUrl}/${fileName}`;
+
+      setValue('file', file);
+      setValue('fileUrl', fileUrl);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      throw error;
+    }
   };
 
   return (
@@ -136,7 +169,7 @@ export default function Step2() {
                   variant="contained"
                   fullWidth
                   size="large"
-                  disabled={!!(errors.linkUrl || (errors.email && sendByEmail)) || (sendByEmail && !email)}
+                  disabled={!!(errors.linkUrl || (errors.email && sendByEmail)) || (sendByEmail && !email) || loading}
                   onClick={() => {
                     clearErrors();
                     setValue('activeStep', activeStep + 1);

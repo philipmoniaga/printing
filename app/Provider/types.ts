@@ -10,6 +10,7 @@ export type FieldValues = {
   totalPrice: number;
   countBox: number;
   file?: null | any;
+  fileUrl?: string;
   linkUrl?: string;
   sendByEmail: boolean;
   email?: string;
